@@ -1,9 +1,3 @@
-# Progetto\_BdS\_ScuolaDanza
-
-Progetto di Basi di Dati - Sistema gestionale per una scuola di danza
-
-
-
 \# Sistema Informativo – Scuola di Danza
 
 
