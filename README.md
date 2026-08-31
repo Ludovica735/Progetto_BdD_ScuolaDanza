@@ -1,4 +1,4 @@
-\# Sistema Informativo – Scuola di Danza
+# Sistema Informativo – Scuola di Danza
 
 
 
