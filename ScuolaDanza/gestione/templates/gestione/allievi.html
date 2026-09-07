@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <title>Corsi - Scuola di Danza</title>
+    <title>Allievi - Scuola di Danza</title>
     <style>
         body {
             font-family: 'Segoe UI', Arial, sans-serif;
@@ -29,36 +29,29 @@
             margin-left: 25px;
             font-size: 16px;
         }
-        nav a:hover {
-            text-decoration: underline;
-        }
         h1 {
             text-align: center;
             color: #7b3f61;
             margin-top: 40px;
         }
-        .corsi-list {
+        .allievi-list {
             max-width: 700px;
             margin: 30px auto;
             padding: 0 20px;
         }
-        .corso-card {
+        .allievo-card {
             background-color: #fbe4ef;
             border-radius: 12px;
-            padding: 20px 25px;
-            margin-bottom: 18px;
+            padding: 18px 25px;
+            margin-bottom: 15px;
         }
-        .corso-card h3 {
-            margin: 0 0 8px 0;
+        .allievo-card h3 {
+            margin: 0 0 6px 0;
             color: #7b3f61;
         }
-        .corso-card p {
-            margin: 4px 0;
+        .allievo-card p {
+            margin: 2px 0;
             color: #5a4a5a;
-        }
-        .prezzo {
-            font-weight: bold;
-            color: #d98fb3;
         }
     </style>
 </head>
@@ -72,14 +65,16 @@
         </div>
     </nav>
 
-    <h1>I nostri Corsi</h1>
-    <div class="corsi-list">
-        {% for corso in corsi %}
-        <div class="corso-card">
-            <h3><a href="/corsi/{{ corso.id_corso }}/" style="color: #7b3f61; text-decoration: none;">{{ corso.nome }}</a></h3>
-            <p>Stile: {{ corso.stile }} — Livello: {{ corso.livello }}</p>
-            <p class="prezzo">{{ corso.prezzo }} € / mese</p>
+    <h1>I nostri Allievi</h1>
+    <div class="allievi-list">
+        {% for allievo in allievi %}
+        <div class="allievo-card">
+            <h3>{{ allievo.utente }}</h3>
+            <p>Livello: {{ allievo.livello_danza }}</p>
+            <p>Iscritto/a dal: {{ allievo.data_iscrizione_scuola }}</p>
         </div>
+        {% empty %}
+        <p>Nessun allievo registrato.</p>
         {% endfor %}
     </div>
 </body>
