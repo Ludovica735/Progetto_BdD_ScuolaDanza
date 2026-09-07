@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Corsi - Scuola di Danza</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fdfaf6;
+            color: #3a2e3a;
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #d98fb3;
+            padding: 20px 40px;
+        }
+        nav .logo {
+            font-size: 22px;
+            font-weight: bold;
+            color: white;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 16px;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        h1 {
+            text-align: center;
+            color: #7b3f61;
+            margin-top: 40px;
+        }
+        .corsi-list {
+            max-width: 700px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+        .corso-card {
+            background-color: #fbe4ef;
+            border-radius: 12px;
+            padding: 20px 25px;
+            margin-bottom: 18px;
+        }
+        .corso-card h3 {
+            margin: 0 0 8px 0;
+            color: #7b3f61;
+        }
+        .corso-card p {
+            margin: 4px 0;
+            color: #5a4a5a;
+        }
+        .prezzo {
+            font-weight: bold;
+            color: #d98fb3;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">Scuola di Danza</div>
+        <div>
+            <a href="/">Home</a>
+            <a href="/corsi/">Corsi</a>
+        </div>
+    </nav>
+
+    <h1>I nostri Corsi</h1>
+    <div class="corsi-list">
+        {% for corso in corsi %}
+        <div class="corso-card">
+            <h3><a href="/corsi/{{ corso.id_corso }}/" style="color: #7b3f61; text-decoration: none;">{{ corso.nome }}</a></h3>
+            <p>Stile: {{ corso.stile }} — Livello: {{ corso.livello }}</p>
+            <p class="prezzo">{{ corso.prezzo }} € / mese</p>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

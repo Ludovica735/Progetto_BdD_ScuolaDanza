@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ corso.nome }} - Scuola di Danza</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fdfaf6;
+            color: #3a2e3a;
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #d98fb3;
+            padding: 20px 40px;
+        }
+        nav .logo {
+            font-size: 22px;
+            font-weight: bold;
+            color: white;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 16px;
+        }
+        .content {
+            max-width: 700px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+        h1 {
+            color: #7b3f61;
+        }
+        .info-box {
+            background-color: #fbe4ef;
+            border-radius: 12px;
+            padding: 20px 25px;
+            margin-bottom: 25px;
+        }
+        .allievi-list {
+            list-style: none;
+            padding: 0;
+        }
+        .allievi-list li {
+            background-color: white;
+            border: 1px solid #eadde3;
+            border-radius: 8px;
+            padding: 10px 15px;
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">Scuola di Danza</div>
+        <div>
+            <a href="/">Home</a>
+            <a href="/corsi/">Corsi</a>
+        </div>
+    </nav>
+
+    <div class="content">
+        <h1>{{ corso.nome }}</h1>
+        <div class="info-box">
+            <p>Stile: {{ corso.stile }} — Livello: {{ corso.livello }}</p>
+            <p>Prezzo: {{ corso.prezzo }} € / mese</p>
+            <p>Insegnante: {{ corso.insegnante }}</p>
+        </div>
+
+        <h2>Allievi iscritti</h2>
+        <ul class="allievi-list">
+            {% for iscrizione in iscrizioni %}
+                <li>{{ iscrizione.allievo }} — quota pagata: {{ iscrizione.quota_pagata }} € ({{ iscrizione.stato }})</li>
+            {% empty %} #output per pagina vuota
+                <li>Nessun allievo iscritto a questo corso.</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
