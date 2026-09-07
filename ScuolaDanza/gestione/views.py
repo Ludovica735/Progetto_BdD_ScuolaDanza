@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from .models import Corso, Iscrizione, Allievo
+from .models import Corso, Iscrizione, Allievo, Insegnante, Amministratore, HaFiglio
 
 # Create your views here.
 def home(request):
@@ -18,3 +18,19 @@ def dettaglio_corso(request, corso_id):
 def elenco_allievi(request):
     allievi = Allievo.objects.all()
     return render(request, 'gestione/allievi.html', {'allievi': allievi})
+
+def team(request):
+    insegnanti = Insegnante.objects.all()
+    amministratori = Amministratore.objects.all()
+    return render(request, 'gestione/team.html', {'insegnanti': insegnanti, 'amministratori': amministratori})
+
+def elenco_allievi(request):
+    allievi = Allievo.objects.all()
+    lista_allievi = []
+    for allievo in allievi:
+        genitore = None
+        ha_figlio = HaFiglio.objects.filter(allievo=allievo).first()
+        if ha_figlio:
+            genitore = ha_figlio.genitore
+        lista_allievi.append({'allievo': allievo, 'genitore': genitore})
+    return render(request, 'gestione/allievi.html', {'lista_allievi': lista_allievi})

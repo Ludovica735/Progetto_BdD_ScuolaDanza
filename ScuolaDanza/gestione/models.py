@@ -34,6 +34,7 @@ class Insegnante(models.Model):
     utente = models.OneToOneField(Utente, on_delete=models.CASCADE, primary_key=True, db_column='id_utente')
     specializzazione = models.CharField(max_length=50, null=True, blank=True)
     anni_esperienza = models.IntegerField(null=True, blank=True)
+    biografia = models.TextField(null=True, blank=True)
 
     class Meta:
         db_table = 'insegnante'
@@ -45,6 +46,7 @@ class Insegnante(models.Model):
 
 class Amministratore(models.Model):
     utente = models.OneToOneField(Utente, on_delete=models.CASCADE, primary_key=True, db_column='id_utente')
+    biografia = models.TextField(null=True, blank=True)
 
     class Meta:
         db_table = 'amministratore'

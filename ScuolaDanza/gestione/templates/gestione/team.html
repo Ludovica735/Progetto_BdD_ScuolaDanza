@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <title>Allievi - Scuola di Danza</title>
+    <title>Il nostro Team - Scuola di Danza</title>
     <style>
         body {
             font-family: 'Segoe UI', Arial, sans-serif;
@@ -34,24 +34,36 @@
             color: #7b3f61;
             margin-top: 40px;
         }
-        .allievi-list {
+        h2 {
+            color: #7b3f61;
             max-width: 700px;
-            margin: 30px auto;
+            margin: 40px auto 15px auto;
             padding: 0 20px;
         }
-        .allievo-card {
+        .team-list {
+            max-width: 700px;
+            margin: 0 auto 30px auto;
+            padding: 0 20px;
+        }
+        .persona-card {
             background-color: #fbe4ef;
             border-radius: 12px;
-            padding: 18px 25px;
-            margin-bottom: 15px;
+            padding: 20px 25px;
+            margin-bottom: 18px;
         }
-        .allievo-card h3 {
+        .persona-card h3 {
             margin: 0 0 6px 0;
             color: #7b3f61;
         }
-        .allievo-card p {
-            margin: 2px 0;
+        .persona-card .ruolo {
+            font-size: 14px;
+            color: #a8688a;
+            margin-bottom: 10px;
+        }
+        .persona-card p {
+            margin: 4px 0;
             color: #5a4a5a;
+            line-height: 1.5;
         }
     </style>
 </head>
@@ -66,19 +78,26 @@
         </div>
     </nav>
 
-    <h1>I nostri Allievi</h1>
-    <div class="allievi-list">
-        {% for item in lista_allievi %}
-        <div class="allievo-card">
-            <h3>{{ item.allievo.utente }}</h3>
-            <p>Livello: {{ item.allievo.livello_danza }}</p>
-            <p>Iscritto/a dal: {{ item.allievo.data_iscrizione_scuola }}</p>
-            {% if item.genitore %}
-                <p>Genitore: {{ item.genitore }}</p>
-            {% endif %}
+    <h1>Il nostro Team</h1>
+
+    <h2>Insegnanti</h2>
+    <div class="team-list">
+        {% for insegnante in insegnanti %}
+        <div class="persona-card">
+            <h3>{{ insegnante.utente }}</h3>
+            <div class="ruolo">{{ insegnante.specializzazione }} — {{ insegnante.anni_esperienza }} anni di esperienza</div>
+            <p>{{ insegnante.biografia }}</p>
         </div>
-        {% empty %}
-        <p>Nessun allievo registrato.</p>
+        {% endfor %}
+    </div>
+
+    <h2>Amministrazione</h2>
+    <div class="team-list">
+        {% for amministratore in amministratori %}
+        <div class="persona-card">
+            <h3>{{ amministratore.utente }}</h3>
+            <p>{{ amministratore.biografia }}</p>
+        </div>
         {% endfor %}
     </div>
 </body>
