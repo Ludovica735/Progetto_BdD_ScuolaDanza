@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Orari - Scuola di Danza</title>
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #fdfaf6; color: #3a2e3a; margin: 0; }
+        nav { display: flex; justify-content: space-between; align-items: center; background-color: #d98fb3; padding: 20px 40px; }
+        nav .logo { font-size: 22px; font-weight: bold; color: white; }
+        nav a { color: white; text-decoration: none; margin-left: 25px; }
+        h1 { text-align: center; color: #7b3f61; margin-top: 40px; }
+        table { max-width: 700px; margin: 30px auto; border-collapse: collapse; width: 90%; }
+        th, td { padding: 12px 15px; text-align: left; }
+        th { background-color: #d98fb3; color: white; }
+        tr:nth-child(even) { background-color: #fbe4ef; }
+        tr:nth-child(odd) { background-color: #ffffff; }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">Scuola di Danza</div>
+        <div>
+            <a href="/">Home</a>
+            <a href="/corsi/">Corsi</a>
+            <a href="/allievi/">Allievi</a>
+            <a href="/team/">Team</a>
+            <a href="/orari/">Orari</a>
+            <a href="/login/">Login</a>
+            <a href="/saggi/">Saggi</a>
+        </div>
+    </nav>
+
+    <h1>Orario delle Lezioni</h1>
+    <table>
+        <tr>
+            <th>Corso</th>
+            <th>Data</th>
+            <th>Orario</th>
+        </tr>
+        {% for lezione in lezioni %}
+        <tr>
+            <td>{{ lezione.corso.nome }}</td>
+            <td>{{ lezione.data }}</td>
+            <td>{{ lezione.ora_inizio }} - {{ lezione.ora_fine }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

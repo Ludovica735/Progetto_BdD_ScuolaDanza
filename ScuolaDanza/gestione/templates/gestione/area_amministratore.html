@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Area Amministratore</title>
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #fdfaf6; color: #3a2e3a; margin: 0; }
+        nav { display: flex; justify-content: space-between; align-items: center; background-color: #d98fb3; padding: 20px 40px; }
+        nav .logo { font-size: 22px; font-weight: bold; color: white; }
+        nav a { color: white; text-decoration: none; margin-left: 25px; }
+        .content { max-width: 700px; margin: 30px auto; padding: 0 20px; }
+        h1 { color: #7b3f61; }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">Scuola di Danza</div>
+        <div>
+            <a href="/">Home</a>
+            <a href="/logout/">Logout</a>
+        </div>
+    </nav>
+    <div class="content">
+       <h1>Ciao, {{ amministratore.utente }}!</h1>
+       <p>Benvenuta nella tua area di amministrazione della scuola.</p>
+       <p><a href="/allievi/" style="color: #7b3f61;">Vedi tutti gli allievi</a></p>
+
+       <h2>Corsi</h2>
+       {% for corso in corsi %}
+          <p><a href="/corsi/{{ corso.id_corso }}/" style="color: #7b3f61;">{{ corso.nome }}</a></p>
+       {% empty %}
+          <p>Nessun corso presente.</p>
+       {% endfor %}
+
+        <h2>Saggi organizzati</h2>
+        {% for saggio in saggi %}
+           <p><a href="/saggi/{{ saggio.id_saggio }}/" style="color: #7b3f61;">{{ saggio.titolo }}</a> — {{ saggio.data }}</p>
+        {% empty %}
+           <p>Nessun saggio organizzato.</p>
+        {% endfor %}
+    </div>
+</body>
+</html>

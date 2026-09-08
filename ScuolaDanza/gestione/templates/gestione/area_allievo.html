@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Area Allievo</title>
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #fdfaf6; color: #3a2e3a; margin: 0; }
+        nav { display: flex; justify-content: space-between; align-items: center; background-color: #d98fb3; padding: 20px 40px; }
+        nav .logo { font-size: 22px; font-weight: bold; color: white; }
+        nav a { color: white; text-decoration: none; margin-left: 25px; }
+        .content { max-width: 700px; margin: 30px auto; padding: 0 20px; }
+        h1 { color: #7b3f61; }
+        .card { background-color: #fbe4ef; border-radius: 12px; padding: 18px 25px; margin-bottom: 15px; }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">Scuola di Danza</div>
+        <div>
+            <a href="/">Home</a>
+            <a href="/logout/">Logout</a>
+        </div>
+    </nav>
+    <div class="content">
+        <h1>Ciao, {{ allievo.utente }}!</h1>
+        <p>Livello: {{ allievo.livello_danza }}</p>
+        
+        <h2>I tuoi corsi</h2>
+        {% for iscrizione in iscrizioni %}
+        <div class="card">
+            <strong>{{ iscrizione.corso.nome }}</strong><br>
+            Quota pagata: {{ iscrizione.quota_pagata }} € — Stato: {{ iscrizione.stato }}
+        </div>
+        {% empty %}
+        <p>Non sei ancora iscritta/o a nessun corso.</p>
+        {% endfor %}
+
+        <h2>I tuoi saggi</h2>
+        {% for partecipazione in partecipazioni_saggi %}
+            <div class="card">{{ partecipazione.saggio.titolo }} — {{ partecipazione.saggio.data }} ({{ partecipazione.saggio.luogo }})</div>
+        {% empty %}
+            <p>Non partecipi a nessun saggio al momento.</p>
+        {% endfor %}
+        </div>
+</body>
+</html>

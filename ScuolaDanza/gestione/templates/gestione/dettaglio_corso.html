@@ -64,6 +64,7 @@
             <a href="/corsi/">Corsi</a>
             <a href="/allievi/">Allievi</a>
             <a href="/team/">Team</a>
+            <a href="/orari/">Orari</a>
         </div>
     </nav>
 
@@ -71,18 +72,26 @@
         <h1>{{ corso.nome }}</h1>
         <div class="info-box">
             <p>Stile: {{ corso.stile }} — Livello: {{ corso.livello }}</p>
-            <p>Prezzo: {{ corso.prezzo }} € / mese</p>
+            {% if ruolo == 'amministratore' %}
+               <p>Prezzo: {{ corso.prezzo }} € / mese</p>
+            {% endif %}
             <p>Insegnante: {{ corso.insegnante }}</p>
         </div>
 
         <h2>Allievi iscritti</h2>
         <ul class="allievi-list">
             {% for iscrizione in iscrizioni %}
-                <li>{{ iscrizione.allievo }} — quota pagata: {{ iscrizione.quota_pagata }} € ({{ iscrizione.stato }})</li>
-            {% empty %} #output per pagina vuota
-                <li>Nessun allievo iscritto a questo corso.</li>
+               <li>
+                   {{ iscrizione.allievo }}
+                   {% if ruolo == 'amministratore' %}
+                       — quota pagata: {{ iscrizione.quota_pagata }} €
+({{ iscrizione.stato }})
+                   {% endif %}
+               </li>
+            {% empty %}
+              <li>Nessun allievo iscritto a questo corso.</li>
             {% endfor %}
         </ul>
-    </div>
+        </div>
 </body>
 </html>

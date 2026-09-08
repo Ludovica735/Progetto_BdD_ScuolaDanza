@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Area Genitore</title>
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #fdfaf6; color: #3a2e3a; margin: 0; }
+        nav { display: flex; justify-content: space-between; align-items: center; background-color: #d98fb3; padding: 20px 40px; }
+        nav .logo { font-size: 22px; font-weight: bold; color: white; }
+        nav a { color: white; text-decoration: none; margin-left: 25px; }
+        .content { max-width: 700px; margin: 30px auto; padding: 0 20px; }
+        h1 { color: #7b3f61; }
+        .card { background-color: #fbe4ef; border-radius: 12px; padding: 18px 25px; margin-bottom: 15px; }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">Scuola di Danza</div>
+        <div>
+            <a href="/">Home</a>
+            <a href="/logout/">Logout</a>
+        </div>
+    </nav>
+    <div class="content">
+        <h1>Ciao, {{ genitore.utente }}!</h1>
+        <h2>I tuoi figli iscritti</h2>
+        {% for item in figli_con_corsi %}
+        <div class="card">
+            <strong>{{ item.allievo.utente }}</strong> — Livello: {{ item.allievo.livello_danza }}
+            {% for iscrizione in item.iscrizioni %}
+                <br>{{ iscrizione.corso.nome }} — {{ iscrizione.quota_pagata }} €
+            {% endfor %}
+        </div>
+        {% empty %}
+        <p>Nessun figlio associato.</p>
+        {% endfor %}
+    </div>
+</body>
+</html>

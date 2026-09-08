@@ -70,6 +70,9 @@
             <a href="/corsi/">Corsi</a>
             <a href="/allievi/">Allievi</a>
 	    <a href="/team/">Team</a>
+            <a href="/orari/">Orari</a>
+            <a href="/login/">Login</a>
+            <a href="/saggi/">Saggi</a>
         </div>
     </nav>
 
@@ -77,7 +80,7 @@
     <div class="corsi-list">
         {% for corso in corsi %}
         <div class="corso-card">
-            <h3><a href="/corsi/{{ corso.id_corso }}/" style="color: #7b3f61; text-decoration: none;">{{ corso.nome }}</a></h3>
+            <h3>{{ corso.nome }}</h3>
             <p>Stile: {{ corso.stile }} — Livello: {{ corso.livello }}</p>
             <p class="prezzo">{{ corso.prezzo }} € / mese</p>
         </div>

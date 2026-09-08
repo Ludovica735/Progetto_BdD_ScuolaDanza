@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Saggi - Scuola di Danza</title>
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #fdfaf6; color: #3a2e3a; margin: 0; }
+        nav { display: flex; justify-content: space-between; align-items: center; background-color: #d98fb3; padding: 20px 40px; }
+        nav .logo { font-size: 22px; font-weight: bold; color: white; }
+        nav a { color: white; text-decoration: none; margin-left: 25px; }
+        h1 { text-align: center; color: #7b3f61; margin-top: 40px; }
+        .saggi-list { max-width: 700px; margin: 30px auto; padding: 0 20px; }
+        .saggio-card { background-color: #fbe4ef; border-radius: 12px; padding: 20px 25px; margin-bottom: 18px; }
+        .saggio-card h3 { margin: 0 0 8px 0; color: #7b3f61; }
+        .saggio-card p { margin: 4px 0; color: #5a4a5a; }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">Scuola di Danza</div>
+        <div>
+            <a href="/">Home</a>
+            <a href="/corsi/">Corsi</a>
+            <a href="/team/">Team</a>
+            <a href="/orari/">Orari</a>
+            <a href="/saggi/">Saggi</a>
+            <a href="/login/">Login</a>
+        </div>
+    </nav>
+
+    <h1>I nostri Saggi ed Eventi</h1>
+    <div class="saggi-list">
+        {% for saggio in saggi %}
+        <div class="saggio-card">
+            <h3>{{ saggio.titolo }}</h3>
+            <p>Data: {{ saggio.data }} — Luogo: {{ saggio.luogo }}</p>
+        </div>
+        {% empty %}
+        <p>Nessun saggio in programma al momento.</p>
+        {% endfor %}
+    </div>
+</body>
+</html>
