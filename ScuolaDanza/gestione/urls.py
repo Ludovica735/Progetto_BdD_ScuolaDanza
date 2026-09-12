@@ -16,5 +16,6 @@ urlpatterns = [
     path('orari/', views.orari, name='orari'),
     path('saggi/', views.elenco_saggi, name='elenco_saggi'),
     path('saggi/<int:saggio_id>/', views.dettaglio_saggio, name='dettaglio_saggio'),
+    path('saggi/<int:saggio_id>/iscriviti/', views.iscrivi_saggio, name='iscrivi_saggio'),
 ]
 

@@ -9,8 +9,12 @@ def home(request):
     return render(request, 'gestione/home.html')
 
 def elenco_corsi(request):
-    corsi = Corso.objects.all()
-    return render(request, 'gestione/corsi.html', {'corsi': corsi})
+    query = request.GET.get('q', '')
+    if query:
+        corsi = Corso.objects.filter(nome__icontains=query) | Corso.objects.filter(stile__icontains=query)
+    else:
+        corsi = Corso.objects.all()
+    return render(request, 'gestione/corsi.html', {'corsi': corsi, 'query': query})
 
 def dettaglio_corso(request, corso_id):
     if request.session.get('ruolo') not in ('amministratore', 'insegnante'):
@@ -86,8 +90,20 @@ def area_allievo(request):
     allievo = Allievo.objects.get(utente__id_utente=request.session['id_utente'])
     iscrizioni = Iscrizione.objects.filter(allievo=allievo)
     partecipazioni_saggi = PartecipaSaggio.objects.filter(allievo=allievo)
-    return render(request, 'gestione/area_allievo.html', {'allievo': allievo, 'iscrizioni': iscrizioni})
 
+    tutti_i_saggi = Saggio.objects.all()
+    saggi_disponibili = []
+    for saggio in tutti_i_saggi:
+        gia_iscritto = PartecipaSaggio.objects.filter(allievo=allievo, saggio=saggio).exists()
+        if not gia_iscritto:
+            saggi_disponibili.append(saggio)
+
+    return render(request, 'gestione/area_allievo.html', {
+        'allievo': allievo,
+        'iscrizioni': iscrizioni,
+        'partecipazioni_saggi': partecipazioni_saggi,
+        'saggi_disponibili': saggi_disponibili
+    })
 
 def area_insegnante(request):
     if request.session.get('ruolo') != 'insegnante':
@@ -130,3 +146,13 @@ def dettaglio_saggio(request, saggio_id):
     saggio = Saggio.objects.get(id_saggio=saggio_id)
     partecipazioni = PartecipaSaggio.objects.filter(saggio=saggio)
     return render(request, 'gestione/dettaglio_saggio.html', {'saggio': saggio, 'partecipazioni': partecipazioni})
+
+def iscrivi_saggio(request, saggio_id):
+    if request.session.get('ruolo') != 'allievo':
+        return redirect('login')
+    allievo = Allievo.objects.get(utente__id_utente=request.session['id_utente'])
+    saggio = Saggio.objects.get(id_saggio=saggio_id)
+    if not PartecipaSaggio.objects.filter(allievo=allievo, saggio=saggio).exists():
+        nuova_partecipazione = PartecipaSaggio(allievo=allievo, saggio=saggio)
+        nuova_partecipazione.save(force_insert=True)
+    return redirect('area_allievo')
