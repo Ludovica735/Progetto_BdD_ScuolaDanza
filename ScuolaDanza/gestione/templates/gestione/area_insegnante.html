@@ -24,15 +24,23 @@
     <div class="content">
         <h1>Ciao, {{ insegnante.utente }}!</h1>
         <p>Specializzazione: {{ insegnante.specializzazione }}</p>
+
         <h2>I tuoi corsi</h2>
-        {% for corso in corsi %}
+        {% for item in corsi_con_lezioni %}
         <div class="card">
-            <strong><a href="/corsi/{{ corso.id_corso }}/" style="color: #7b3f61;">{{ corso.nome }}</a></strong><br>
-            Livello: {{ corso.livello }}
-        </div>
-        {% empty %}
-        <p>Non hai ancora corsi assegnati.</p>
-        {% endfor %}
-    </div>
+           <strong><a href="/corsi/{{ item.corso.id_corso }}/" style="color: #7b3f61;">{{ item.corso.nome }}</a></strong><br>
+           Livello: {{ item.corso.livello }}
+           <ul>
+               {% for lezione in item.lezioni %}
+                 <li>{{ lezione.data }} ({{ lezione.ora_inizio }}-{{ lezione.ora_fine }}) —
+                    <a href="/lezioni/{{ lezione.id_lezione }}/presenze/" style="color: #7b3f61;">Segna presenze</a>
+                 </li>
+               {% endfor %}
+           </ul>
+         </div>
+{% empty %}
+<p>Non hai ancora corsi assegnati.</p>
+{% endfor %}
+
 </body>
 </html>

@@ -24,16 +24,23 @@
     <div class="content">
         <h1>Ciao, {{ genitore.utente }}!</h1>
         <h2>I tuoi figli iscritti</h2>
+        
         {% for item in figli_con_corsi %}
         <div class="card">
-            <strong>{{ item.allievo.utente }}</strong> — Livello: {{ item.allievo.livello_danza }}
-            {% for iscrizione in item.iscrizioni %}
-                <br>{{ iscrizione.corso.nome }} — {{ iscrizione.quota_pagata }} €
-            {% endfor %}
-        </div>
-        {% empty %}
-        <p>Nessun figlio associato.</p>
-        {% endfor %}
-    </div>
+           <strong>{{ item.allievo.utente }}</strong> — Livello: {{ item.allievo.livello_danza }}
+           {% for iscrizione in item.iscrizioni %}
+              <br>{{ iscrizione.corso.nome }} — {{ iscrizione.quota_pagata }} €
+           {% endfor %}
+           <br><br><strong>Presenze:</strong>
+           {% for presenza in item.presenze %}
+              <br>{{ presenza.lezione.corso.nome }} ({{ presenza.lezione.data }}): {% if presenza.presente %}Presente{% else %}Assente{% endif %}
+           {% empty %}
+              <br>Nessuna presenza registrata.
+           {% endfor %}
+         </div>
+{% empty %}
+<p>Nessun figlio associato.</p>
+{% endfor %}
+
 </body>
 </html>

@@ -17,5 +17,6 @@ urlpatterns = [
     path('saggi/', views.elenco_saggi, name='elenco_saggi'),
     path('saggi/<int:saggio_id>/', views.dettaglio_saggio, name='dettaglio_saggio'),
     path('saggi/<int:saggio_id>/iscriviti/', views.iscrivi_saggio, name='iscrivi_saggio'),
+    path('lezioni/<int:lezione_id>/presenze/', views.segna_presenze, name='segna_presenze'),
 ]
 

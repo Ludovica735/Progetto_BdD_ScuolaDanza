@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from .models import Utente, Corso, Iscrizione, Allievo, Insegnante, Amministratore, Genitore, HaFiglio, Lezione, Saggio, PartecipaSaggio
+from .models import Utente, Corso, Iscrizione, Allievo, Insegnante, Amministratore, Genitore, HaFiglio, Lezione, Saggio, PartecipaSaggio, Presenza
 
 from django.shortcuts import redirect
 
@@ -90,6 +90,7 @@ def area_allievo(request):
     allievo = Allievo.objects.get(utente__id_utente=request.session['id_utente'])
     iscrizioni = Iscrizione.objects.filter(allievo=allievo)
     partecipazioni_saggi = PartecipaSaggio.objects.filter(allievo=allievo)
+    presenze = Presenza.objects.filter(allievo=allievo)
 
     tutti_i_saggi = Saggio.objects.all()
     saggi_disponibili = []
@@ -102,7 +103,8 @@ def area_allievo(request):
         'allievo': allievo,
         'iscrizioni': iscrizioni,
         'partecipazioni_saggi': partecipazioni_saggi,
-        'saggi_disponibili': saggi_disponibili
+        'saggi_disponibili': saggi_disponibili,
+        'presenze': presenze
     })
 
 def area_insegnante(request):
@@ -110,8 +112,11 @@ def area_insegnante(request):
         return redirect('login')
     insegnante = Insegnante.objects.get(utente__id_utente=request.session['id_utente'])
     corsi = Corso.objects.filter(insegnante=insegnante)
-    return render(request, 'gestione/area_insegnante.html', {'insegnante': insegnante, 'corsi': corsi})
-
+    corsi_con_lezioni = []
+    for corso in corsi:
+        lezioni = Lezione.objects.filter(corso=corso)
+        corsi_con_lezioni.append({'corso': corso, 'lezioni': lezioni})
+    return render(request, 'gestione/area_insegnante.html', {'insegnante': insegnante, 'corsi_con_lezioni': corsi_con_lezioni})
 
 def area_amministratore(request):
     if request.session.get('ruolo') != 'amministratore':
@@ -129,7 +134,8 @@ def area_genitore(request):
     figli_con_corsi = []
     for figlio in figli:
         iscrizioni = Iscrizione.objects.filter(allievo=figlio.allievo)
-        figli_con_corsi.append({'allievo': figlio.allievo, 'iscrizioni': iscrizioni})
+        presenze = Presenza.objects.filter(allievo=figlio.allievo)
+        figli_con_corsi.append({'allievo': figlio.allievo, 'iscrizioni': iscrizioni, 'presenze': presenze})
     return render(request, 'gestione/area_genitore.html', {'genitore': genitore, 'figli_con_corsi': figli_con_corsi})
 
 def orari(request):
@@ -156,3 +162,37 @@ def iscrivi_saggio(request, saggio_id):
         nuova_partecipazione = PartecipaSaggio(allievo=allievo, saggio=saggio)
         nuova_partecipazione.save(force_insert=True)
     return redirect('area_allievo')
+
+def segna_presenze(request, lezione_id):
+    if request.session.get('ruolo') != 'insegnante':
+        return redirect('login')
+    lezione = Lezione.objects.get(id_lezione=lezione_id)
+    corso = lezione.corso
+    iscrizioni = Iscrizione.objects.filter(corso=corso)
+
+    if request.method == 'POST':
+        for iscrizione in iscrizioni:
+            allievo = iscrizione.allievo
+            gia_segnato = Presenza.objects.filter(allievo=allievo, lezione=lezione).exists()
+            if not gia_segnato:
+                chiave = 'presente_' + str(allievo.utente.id_utente)
+                presente = request.POST.get(chiave) is not None
+                nuova_presenza = Presenza(allievo=allievo, lezione=lezione, presente=presente)
+                nuova_presenza.save(force_insert=True)
+
+    presenze_registrate = Presenza.objects.filter(lezione=lezione)
+    allievi_registrati = []
+    for p in presenze_registrate:
+        allievi_registrati.append(p.allievo.utente.id_utente)
+
+    allievi_da_segnare = []
+    for iscrizione in iscrizioni:
+        if iscrizione.allievo.utente.id_utente not in allievi_registrati:
+            allievi_da_segnare.append(iscrizione.allievo)
+
+    return render(request, 'gestione/segna_presenze.html', {
+        'lezione': lezione,
+        'corso': corso,
+        'presenze_registrate': presenze_registrate,
+        'allievi_da_segnare': allievi_da_segnare
+    })

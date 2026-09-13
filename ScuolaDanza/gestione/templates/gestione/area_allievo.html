@@ -34,6 +34,16 @@
         {% empty %}
         <p>Non sei ancora iscritta/o a nessun corso.</p>
         {% endfor %}
+        
+        <h2>Le tue presenze</h2>
+        {% for presenza in presenze %}
+        <div class="card">
+           {{ presenza.lezione.corso.nome }} — {{ presenza.lezione.data }}:
+           {% if presenza.presente %}Presente{% else %}Assente{% endif %}
+        </div>
+        {% empty %}
+        <p>Nessuna presenza ancora registrata.</p>
+        {% endfor %}
 
         <h2>I tuoi saggi</h2>
         {% for partecipazione in partecipazioni_saggi %}
