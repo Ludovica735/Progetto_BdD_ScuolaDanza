@@ -58,8 +58,9 @@ L'architettura garantisce un controllo degli accessi differenziato in base al ru
 Per eseguire l'applicazione è necessario:
 
 1. **Avere Python installato** nel proprio ambiente.
-2. **Avere accesso a un server MySQL/MariaDB**, preferibilmente con phpMyAdmin.
-3. **Clonare il progetto** nella propria directory locale.
+   > Nota: si consiglia Python 3.12.x — versioni più recenti (es. 3.14) possono presentare incompatibilità con Django 4.2.
+3. **Avere accesso a un server MySQL/MariaDB**, preferibilmente con phpMyAdmin.
+4. **Clonare il progetto** nella propria directory locale.
 
 ```
 git clone https://github.com/Ludovica735/Progetto_BdD_ScuolaDanza.git
@@ -117,7 +118,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'scuola_danza',
         'USER': 'nome_utente',
-        'PASSWORD': ' ',
+        'PASSWORD': '',
         'HOST': 'localhost',
         'PORT': '3306',
     }
