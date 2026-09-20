@@ -138,6 +138,7 @@ python manage.py runserver
 ```
 
 L'applicazione sarà accessibile all'indirizzo: <http://localhost:8000>.
+<img width="1917" height="907" alt="Home" src="https://github.com/user-attachments/assets/a6f9a7aa-6160-4f94-90c5-327528acda60" />
 
 **Homepage:**
 La homepage offre l'accesso alle principali funzionalità della scuola, con la possibilità di consultare i corsi disponibili, il team della scuola, gli orari delle lezioni e gli eventuali eventi e/o saggi programmati. Inoltre, è possibile accedere all'area riservata effettuando il Login, tramite email e password.
@@ -148,16 +149,20 @@ L'applicazione prevede accessi differenziati in base al ruolo dell'utente:
 1. **Login Amministratore**
    - Gestione di corsi, insegnanti e iscrizioni.
    - Organizzazione dei saggi.
+<img width="1917" height="902" alt="Login_Amministratore" src="https://github.com/user-attachments/assets/ade03e3c-a00e-449d-bffc-f8980fe502c1" />
 
 2. **Login Insegnante**
    - Gestione delle lezioni e delle presenze degli allievi.
+<img width="1908" height="900" alt="Login_Insegnante" src="https://github.com/user-attachments/assets/450f86a9-fa97-4505-86f3-3dd9e4d6f4dc" />
 
 3. **Login Genitore**
    - Visualizzazione dei dati e delle presenze dei propri figli.
    - Iscrizione ai corsi e ai saggi.
+<img width="1911" height="902" alt="Login_Genitore" src="https://github.com/user-attachments/assets/21135b2b-74f0-456e-947b-a0de8db7a146" />
 
 4. **Login Allievo**
    - Consultazione del proprio percorso: corsi, presenze e saggi.
+<img width="1916" height="898" alt="Login_Allievo" src="https://github.com/user-attachments/assets/b9d46d06-181f-41cf-85ed-688401b99ddf" />
 
 ---
 
