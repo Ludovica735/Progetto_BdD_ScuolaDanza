@@ -46,11 +46,6 @@ L'architettura garantisce un controllo degli accessi differenziato in base al ru
 
 - **HTML / CSS** – Utilizzati per l'interfaccia utente.
 
-### **Modellazione Dati**
-
-- **Modello E/R** alla base della struttura del database.
-> Nota: nel repository il file del modello E/R è salvato come `.$Modello_ER_scuola_danza.png.bkp` — ti consiglio di rinominarlo in `Modello_ER_scuola_danza.png` così può essere visualizzato direttamente qui nel README.
-
 ---
 
 ## **Installazione**
