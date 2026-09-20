@@ -140,7 +140,7 @@ python manage.py runserver
 L'applicazione sarà accessibile all'indirizzo: <http://localhost:8000>.
 
 **Homepage:**
-La homepage offre l'accesso alle principali funzionalità della scuola, con la possibilità di consultare i corsi disponibili e accedere all'area riservata.
+La homepage offre l'accesso alle principali funzionalità della scuola, con la possibilità di consultare i corsi disponibili, il team della scuola, gli orari delle lezioni e gli eventuali eventi e/o saggi programmati. Inoltre, è possibile accedere all'area riservata effettuando il Login, tramite email e password.
 
 **Area Riservata:**
 L'applicazione prevede accessi differenziati in base al ruolo dell'utente:
