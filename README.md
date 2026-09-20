@@ -20,10 +20,10 @@ L'intento è quello di **sostituire le procedure cartacee** con un'applicazione 
 
 La piattaforma è progettata per rispondere alle esigenze operative di una scuola di danza, offrendo funzionalità quali:
 
-- **Gestione degli allievi**, con iscrizioni ai corsi e storico delle presenze alle lezioni.
-- **Gestione dei corsi e delle lezioni**, tenute dagli insegnanti.
-- **Gestione dei genitori**, collegati agli allievi di cui sono responsabili.
-- **Organizzazione dei saggi**, con relativa partecipazione degli allievi.
+- **Gestione degli allievi**, con iscrizioni ai corsi e storico delle presenze alle lezioni;
+- **Gestione dei corsi e delle lezioni**, tenute dagli insegnanti con relativa tabella orari;
+- **Gestione dei genitori**, collegati ai propri figli allievi di cui sono responsabili e di cui possono monitorare le presenze;
+- **Organizzazione dei saggi**, con relativa partecipazione degli allievi;
 - **Interfaccia differenziata** per allievi, genitori, insegnanti e amministratori, ciascuno con accesso a funzionalità specifiche.
 
 L'architettura garantisce un controllo degli accessi differenziato in base al ruolo dell'utente.
@@ -40,7 +40,7 @@ L'architettura garantisce un controllo degli accessi differenziato in base al ru
 
 ### **Database**
 
-- **MySQL / MariaDB** – Database relazionale esterno (`scuola_danza`), gestito tramite phpMyAdmin per facilitare l'inserimento e la gestione dei dati. Le tabelle principali sono: `allievo`, `amministratore`, `corso`, `genitore`, `ha_figlio`, `insegnante`, `iscrizione`, `lezione`, `partecipa_saggio`, `presenza`, `saggio`, `utente`.
+- **MySQL / MariaDB** – Database relazionale esterno (`scuola_danza`), gestito tramite phpMyAdmin per facilitare l'inserimento e la gestione dei dati. Le tabelle principali sono: `allievo`, `amministratore`, `corso`, `genitore`, `hafiglio`, `insegnante`, `iscrizione`, `lezione`, `partecipa_saggio`, `presenza`, `saggio`, `utente`.
 
 ### **Frontend**
 
